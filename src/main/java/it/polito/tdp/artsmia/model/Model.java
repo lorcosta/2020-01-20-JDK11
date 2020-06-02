@@ -1,5 +1,6 @@
 package it.polito.tdp.artsmia.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
+import org.jgrapht.traverse.DepthFirstIterator;
 
 import it.polito.tdp.artsmia.db.ArtsmiaDAO;
 
@@ -38,5 +40,14 @@ public class Model {
 	public List<Arco> getArtistiConnessi(String role){
 		List<Arco> archi=dao.getArchi(role,idMapArtists);
 		return archi;
+	}
+
+	public List<Artist> calcolaPercorso(Integer artistID) {
+		List<Artist> visita= new ArrayList<Artist>();
+		DepthFirstIterator<Artist,DefaultWeightedEdge> dfv= new DepthFirstIterator<>(this.grafo, idMapArtists.get(artistID));
+		while(dfv.hasNext()) {
+			visita.add(dfv.next());
+		}
+		return visita;
 	}
 }

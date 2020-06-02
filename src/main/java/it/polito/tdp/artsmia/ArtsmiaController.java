@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.artsmia.model.Arco;
+import it.polito.tdp.artsmia.model.Artist;
 import it.polito.tdp.artsmia.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,6 +66,19 @@ public class ArtsmiaController {
     void doCalcolaPercorso(ActionEvent event) {
     	txtResult.clear();
     	txtResult.appendText("Calcola percorso\n");
+    	String stringID=this.txtArtista.getText();
+    	Integer artistID;
+    	try {
+    		artistID=Integer.parseInt(stringID);
+    	}catch(NumberFormatException e) {
+    		e.printStackTrace();
+    		this.txtResult.appendText("ERRORE! Il valore inserito non è un numero corretto");
+    		throw new NumberFormatException("Errore nel parsificare il numero inserito");
+    	}
+    	List<Artist> visita=model.calcolaPercorso(artistID);
+    	for(Artist a:visita) {
+    		//System.out.println()""+a.getName()+" "+a;
+    	}
     }
 
     @FXML
