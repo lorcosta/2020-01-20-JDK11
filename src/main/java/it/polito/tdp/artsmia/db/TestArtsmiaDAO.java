@@ -3,6 +3,7 @@ package it.polito.tdp.artsmia.db;
 import java.util.List;
 
 import it.polito.tdp.artsmia.model.ArtObject;
+import it.polito.tdp.artsmia.model.Artist;
 import it.polito.tdp.artsmia.model.Exhibition;
 
 public class TestArtsmiaDAO {
@@ -21,6 +22,12 @@ public class TestArtsmiaDAO {
 		System.out.println(exhibitions.get(0));
 		System.out.println(exhibitions.size());
 
+		System.out.println("Test selected artists:");
+		//List<Artist> artist=dao.getArtistSelectedRole("Designer");
+		//for(Artist a:artist) {
+			//System.out.println(a.getName()+"-->"+a.getArtistID()+"\n");
+		//}
+		
 	}
 
 }
