@@ -102,7 +102,8 @@ public class ArtsmiaDAO {
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				Artist a=new Artist(res.getInt("artist_id"),res.getString("name"));
-				idMapArtists.put(a.getArtistID(),a);
+				//if(!idMapArtists.containsKey(a.getArtistID()))
+					idMapArtists.put(a.getArtistID(),a);
 				selectedArtists.add(a);
 			}
 			conn.close();

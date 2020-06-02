@@ -1,9 +1,11 @@
 package it.polito.tdp.artsmia;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.artsmia.model.Arco;
 import it.polito.tdp.artsmia.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,19 +45,37 @@ public class ArtsmiaController {
     @FXML
     void doArtistiConnessi(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Calcola artisti connessi");
+    	txtResult.appendText("Calcola artisti connessi\n");
+    	String role=this.boxRuolo.getValue();
+    	if(role==null)
+    		txtResult.appendText("ERRORE. Nessun ruolo selezionato, selezionarne uno.\n");
+    	doCreaGrafo(event);
+    	List<Arco> archi=model.getArtistiConnessi(role);
+    	if(archi==null) {
+    		this.txtResult.appendText("Errore! Creare prima il grafo.\n");
+    	}
+    	Collections.sort(archi);
+    	for(Arco a:archi) {
+    		this.txtResult.appendText("\n"+a.toString());
+    	}
+    	
     }
 
     @FXML
     void doCalcolaPercorso(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Calcola percorso");
+    	txtResult.appendText("Calcola percorso\n");
     }
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Crea grafo");
+    	txtResult.appendText("Crea grafo\n");
+    	String role=this.boxRuolo.getValue();
+    	if(role==null)
+    		txtResult.appendText("ERRORE. Nessun ruolo selezionato\n");
+    	model.creaGrafo(role);
+    	this.txtResult.appendText("Grafo creato con "+model.getNumArchi()+" archi e "+model.getNumVertici()+"vertici.\n");
     }
 
     public void setModel(Model model) {

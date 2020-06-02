@@ -14,7 +14,7 @@ import it.polito.tdp.artsmia.db.ArtsmiaDAO;
 public class Model {
 	private ArtsmiaDAO dao=new ArtsmiaDAO();
 	private Graph<Artist,DefaultWeightedEdge> grafo; 
-	private Map<Integer,Artist> idMapArtists;
+	private Map<Integer,Artist> idMapArtists=new HashMap<>();
 	public List<String> getRoles(){
 		return dao.listRole();
 	}
@@ -28,5 +28,15 @@ public class Model {
 			if(this.grafo.getEdge(a.getA1(), a.getA2())==null)
 				Graphs.addEdgeWithVertices(this.grafo, a.getA1(), a.getA2(), a.getPeso());
 		}
+	}
+	public Integer getNumArchi() {
+		return this.grafo.edgeSet().size();
+	}
+	public Integer getNumVertici() {
+		return this.grafo.vertexSet().size();
+	}
+	public List<Arco> getArtistiConnessi(String role){
+		List<Arco> archi=dao.getArchi(role,idMapArtists);
+		return archi;
 	}
 }

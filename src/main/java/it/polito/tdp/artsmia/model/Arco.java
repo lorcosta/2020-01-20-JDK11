@@ -1,6 +1,6 @@
 package it.polito.tdp.artsmia.model;
 
-public class Arco {
+public class Arco implements Comparable<Arco>{
 	private Artist a1;
 	private	Artist a2;
 	private Integer peso;
@@ -32,6 +32,14 @@ public class Arco {
 	}
 	public void setPeso(Integer peso) {
 		this.peso = peso;
+	}
+	@Override
+	public int compareTo(Arco other) {
+		return -(this.peso-other.peso);
+	}
+	@Override
+	public String toString() {
+		return "Artista 1:"+a1.getName()+", Artista 2: "+a2.getName()+", num. esposizioni comuni: "+peso;
 	}
 	
 	
