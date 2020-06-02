@@ -1,6 +1,7 @@
 package it.polito.tdp.artsmia;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.artsmia.model.Model;
@@ -31,7 +32,7 @@ public class ArtsmiaController {
     private Button btnCalcolaPercorso;
 
     @FXML
-    private ComboBox<?> boxRuolo;
+    private ComboBox<String> boxRuolo;
 
     @FXML
     private TextField txtArtista;
@@ -59,8 +60,12 @@ public class ArtsmiaController {
 
     public void setModel(Model model) {
     	this.model = model;
+    	loadData();
     }
-
+    public void loadData() {
+    	List<String> roles=model.getRoles();
+    	this.boxRuolo.getItems().addAll(roles);
+    }
     
     @FXML
     void initialize() {

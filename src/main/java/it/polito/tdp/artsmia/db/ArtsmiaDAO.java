@@ -64,4 +64,26 @@ public class ArtsmiaDAO {
 		}
 	}
 	
+	public List<String> listRole(){
+		String sql="SELECT DISTINCT(role) " + 
+				"FROM authorship";
+		List<String> roles=new ArrayList<>();
+		Connection conn = DBConnect.getConnection();
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				String role=res.getString("role");
+				roles.add(role);
+			}
+			conn.close();
+			return roles;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }
