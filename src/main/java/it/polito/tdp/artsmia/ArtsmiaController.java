@@ -76,8 +76,9 @@ public class ArtsmiaController {
     		throw new NumberFormatException("Errore nel parsificare il numero inserito");
     	}
     	List<Artist> visita=model.calcolaPercorso(artistID);
+    	this.txtResult.appendText("Percorso piu' lungo: "+visita.size());
     	for(Artist a:visita) {
-    		//System.out.println()""+a.getName()+" "+a;
+    		System.out.println(""+a.getName()+" "+a.getArtistID());
     	}
     }
 
@@ -86,8 +87,10 @@ public class ArtsmiaController {
     	txtResult.clear();
     	txtResult.appendText("Crea grafo\n");
     	String role=this.boxRuolo.getValue();
-    	if(role==null)
+    	if(role==null) {
     		txtResult.appendText("ERRORE. Nessun ruolo selezionato\n");
+    		return;
+    	}
     	model.creaGrafo(role);
     	this.txtResult.appendText("Grafo creato con "+model.getNumArchi()+" archi e "+model.getNumVertici()+"vertici.\n");
     }
